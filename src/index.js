@@ -1,5 +1,34 @@
 import './style/main.less'
 
+/**
+ * Find a specific GET-Parameter in the current Location
+ * @date 2022-03-25
+ * @param {string} parameterName
+ * @returns {string}
+ */
+ export function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+
+/**
+ * Checks if the current location has a specific page query parameter
+ * @date 2022-03-25
+ * @param {string} pageQuery
+ * @returns {boolean}
+ */
+export function isPage(pageQuery) {
+    return findGetParameter("page") == pageQuery
+}
+
 
 function base64Encode(str) {
     return window.btoa(str);
@@ -54,6 +83,11 @@ class BattleEngineStateObject {
 import { parse, stringify } from 'zipson';
 
 (function () {
+
+    console.log(isPage("battleSimulator"))
+    if(!isPage("battleSimulator"))
+        return
+
     $(`#form`).last().after(/*html*/ `
     <table>
         <tbody>
