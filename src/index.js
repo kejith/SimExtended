@@ -89,7 +89,7 @@ import { parse, stringify } from 'zipson';
         return
 
     $(`#form`).last().after(/*html*/ `
-    <table>
+    <table style="width:80%">
         <tbody>
                 <tr>
                     <td colspan="">
